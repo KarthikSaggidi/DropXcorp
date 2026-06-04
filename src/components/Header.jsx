@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import {
   ArrowRight,
@@ -11,14 +11,43 @@ import { navItems } from '../data/siteData.js';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100vh';
+    } else {
+      document.body.style.overflow = 'auto';
+      document.body.style.height = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+      document.body.style.height = 'auto';
+    };
+  }, [open]);
 
   const handleNavigation = () => {
     setOpen(false);
+    setActiveDropdown(null);
 
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
+  };
+
+  const handleDropdown = (e, label) => {
+    if (window.innerWidth <= 992) {
+      e.preventDefault();
+
+      setActiveDropdown(
+        activeDropdown === label
+          ? null
+          : label
+      );
+    }
   };
 
   return (
@@ -42,13 +71,14 @@ export default function Header() {
         <button
           className="mobile-toggle"
           onClick={() => setOpen(!open)}
-          aria-label="Open menu"
+          aria-label="Toggle Menu"
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         {/* NAVIGATION */}
         <nav className={open ? 'nav-links show' : 'nav-links'}>
+
           {navItems.map((item) => (
             <div
               className="nav-item"
@@ -57,44 +87,55 @@ export default function Header() {
               <NavLink
                 to={item.path}
                 end={item.path === '/'}
-                onClick={() => {
-                  if (!item.children) {
-                    handleNavigation();
-                  }
-                }}
                 className={({ isActive }) =>
                   isActive ? 'active' : ''
                 }
+                onClick={(e) => {
+                  if (item.children) {
+                    handleDropdown(e, item.label);
+                  } else {
+                    handleNavigation();
+                  }
+                }}
               >
                 {item.label}
 
                 {item.children && (
-                  <ChevronDown size={13} />
+                  <ChevronDown
+                    size={15}
+                    className={
+                      activeDropdown === item.label
+                        ? 'rotate'
+                        : ''
+                    }
+                  />
                 )}
               </NavLink>
 
               {/* DROPDOWN */}
-              {item.children && (
-                <div className="dropdown">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.path}
-                      to={child.path}
-                      onClick={handleNavigation}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
+              {item.children &&
+                (window.innerWidth > 992 ||
+                  activeDropdown === item.label) && (
+                  <div className="dropdown">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.path}
+                        to={child.path}
+                        onClick={handleNavigation}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
             </div>
           ))}
         </nav>
 
-        {/* GET IN TOUCH BUTTON */}
+        {/* DESKTOP CTA ONLY */}
         <Link
           to="/contact"
-          className="top-cta"
+          className="top-cta desktop-cta"
           onClick={handleNavigation}
         >
           Get In Touch

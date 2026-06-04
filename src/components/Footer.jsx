@@ -83,7 +83,7 @@ export default function Footer() {
           <h4>Contact</h4>
 
           <a
-            href="https://maps.google.com"
+            href="https://www.google.com/maps/place/SLN+GREEN+SPACE/@17.5567239,78.4277379,17z/data=!3m1!4b1!4m6!3m5!1s0x3bcb8f0001bf8481:0x86ad6bc9d119d91d!8m2!3d17.5567188!4d78.4326088!16s%2Fg%2F11y82kqhht?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-contact"

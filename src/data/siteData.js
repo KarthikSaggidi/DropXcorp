@@ -9,7 +9,7 @@ export const company = {
   name: 'DropXcorp',
   tagline: 'INNOVATE • BUILD • DELIVER',
   email: 'hello@dropxcorp.com',
-  phone: '+91 90000 00000',
+  phone: '+91 7997005050',
   address: 'India • Remote-first technology studio',
   heroBadge: 'TECHNOLOGY THAT DELIVERS',
   heroTitleLine1: 'We Build',

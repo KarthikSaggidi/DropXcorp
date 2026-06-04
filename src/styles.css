@@ -1531,3 +1531,131 @@ img{
   background: #ffffff;
   border-color: #dbeafe;
 }
+
+
+
+
+
+
+.nav-item {
+  position: relative;
+}
+
+/* Hidden by default */
+.dropdown {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+/* Show on hover */
+.nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+
+
+
+/* Hide desktop CTA on mobile */
+
+@media (max-width: 992px) {
+  .desktop-cta {
+    display: none !important;
+  }
+}
+
+/* Show desktop CTA on desktop */
+
+@media (min-width: 993px) {
+  .desktop-cta {
+    display: flex;
+  }
+}
+
+/* ==========================
+   NAVIGATION HOVER EFFECT
+========================== */
+
+.nav-item > a {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-item > a:hover {
+  color: #2563eb;
+}
+
+/* Animated Underline */
+
+.nav-item > a::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+
+  width: 0;
+  height: 3px;
+
+ 
+
+  border-radius: 20px;
+
+  transition: width 0.3s ease;
+}
+
+.nav-item > a:hover::after {
+  width: 100%;
+}
+
+/* ==========================
+   ACTIVE MENU ITEM
+========================== */
+
+.nav-item > a.active {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.nav-item > a.active::after {
+  width: 100%;
+}
+
+/* ==========================
+   DROPDOWN HOVER
+========================== */
+
+.dropdown a {
+  transition: all 0.25s ease;
+}
+
+.dropdown a:hover {
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.08);
+  padding-left: 18px;
+  border-radius: 8px;
+}
+
+
+
+.top-cta {
+  transition: all 0.3s ease;
+}
+
+.top-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.3);
+}
+
+.mobile-toggle {
+  transition: all 0.3s ease;
+}
+
+.mobile-toggle:hover {
+  transform: rotate(90deg);
+}
