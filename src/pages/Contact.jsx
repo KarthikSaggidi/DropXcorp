@@ -5,8 +5,9 @@ import { contactCards } from '../data/siteData.js';
 export default function Contact() {
 
   const [loading, setLoading] = useState(false);
-
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
+    
     name: '',
     email: '',
     phone: '',
@@ -42,7 +43,11 @@ export default function Contact() {
   }
 );
 
-alert("Message submitted successfully!");
+setShowSuccess(true);
+
+setTimeout(() => {
+  setShowSuccess(false);
+}, 4000);
 
       setFormData({
         name: '',
@@ -64,126 +69,140 @@ alert("Message submitted successfully!");
   };
 
   return (
-    <>
-      {/* HERO SECTION */}
-      <section className="page-hero">
-        <div className="container">
+  <>
+    {/* HERO SECTION */}
+    <section className="page-hero">
+      <div className="container">
+        <span>CONTACT US</span>
 
-          <span>CONTACT US</span>
+        <h1>
+          Let’s build your next
+          digital solution.
+        </h1>
 
-          <h1>
-            Let’s build your next
-            digital solution.
-          </h1>
+        <p>
+          Tell us what you want to build.
+          We will help you plan the best
+          product and technology path.
+        </p>
+      </div>
+    </section>
 
-          <p>
-            Tell us what you want to build.
-            We will help you plan the best
-            product and technology path.
-          </p>
+    {/* CONTACT SECTION */}
+    <section className="container contact-wrap page-section">
 
-        </div>
-      </section>
+      {/* LEFT CONTACT CARDS */}
+      <div className="contact-cards">
+        {contactCards.map((c) => {
+          const Icon = c.icon;
 
-      {/* CONTACT SECTION */}
-      <section className="container contact-wrap page-section">
+          return (
+            <div
+              key={c.title}
+              className="contact-card"
+            >
+              <Icon size={30} />
+              <h3>{c.title}</h3>
+              <p>{c.value}</p>
+            </div>
+          );
+        })}
+      </div>
 
-        {/* LEFT CONTACT CARDS */}
-        <div className="contact-cards">
+      {/* CONTACT FORM */}
+      <form
+        className="contact-form"
+        onSubmit={handleSubmit}
+      >
+        <h2>Send a Message</h2>
 
-          {contactCards.map((c) => {
-            const Icon = c.icon;
-
-            return (
-              <div
-                key={c.title}
-                className="contact-card"
-              >
-                <Icon size={30} />
-
-                <h3>{c.title}</h3>
-
-                <p>{c.value}</p>
-              </div>
-            );
-          })}
-
-        </div>
-
-        {/* CONTACT FORM */}
-        <form
-          className="contact-form"
-          onSubmit={handleSubmit}
-        >
-
-          <h2>Send a Message</h2>
-
-          <div className="form-row">
-
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-
-          </div>
-
-          <div className="form-row">
-
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              type="text"
-              name="project"
-              placeholder="Project Type"
-              value={formData.project}
-              onChange={handleChange}
-              required
-            />
-
-          </div>
-
-          <textarea
-            name="message"
-            placeholder="Tell us about your project"
-            rows="6"
-            value={formData.message}
+        <div className="form-row">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
             onChange={handleChange}
             required
           />
 
-          <button
-            type="submit"
-            className="btn"
-            disabled={loading}
-          >
-            {loading ? 'Sending...' : 'Submit Message'}
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-            <Send size={17} />
-          </button>
+        <div className="form-row">
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone Number"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
 
-        </form>
+          <input
+            type="text"
+            name="project"
+            placeholder="Project Type"
+            value={formData.project}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      </section>
-    </>
-  );
+        <textarea
+          name="message"
+          placeholder="Tell us about your project"
+          rows="6"
+          value={formData.message}
+          onChange={handleChange}
+          required
+        />
+
+        <button
+          type="submit"
+          className="btn"
+          disabled={loading}
+        >
+          {loading ? 'Sending...' : 'Submit Message'}
+          <Send size={17} />
+        </button>
+      </form>
+    </section>
+
+    {/* SUCCESS TOAST */}
+    {showSuccess && (
+  <div className="success-modal-overlay">
+    <div className="success-modal">
+
+      <div className="success-check">
+        ✓
+      </div>
+
+      <h3>Message Sent Successfully</h3>
+
+      <p>
+        Thank you for contacting DropXcorp.
+        Our team will review your request and
+        get back to you shortly.
+      </p>
+
+      <button
+        onClick={() => setShowSuccess(false)}
+        className="success-btn"
+      >
+        Awesome!
+      </button>
+
+    </div>
+  </div>
+)}
+  </>
+);
 }
