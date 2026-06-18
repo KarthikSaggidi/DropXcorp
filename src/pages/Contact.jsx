@@ -4,6 +4,8 @@ import { contactCards } from '../data/siteData.js';
 
 export default function Contact() {
 
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,20 +21,46 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    setLoading(true);
 
-    alert('Message submitted successfully!');
+    try {
+      const response = await fetch(
+  "https://script.google.com/macros/s/AKfycbyQIdZ0O_r6lz5LMu3BEjcg6-G9p4ADVItrpoNnba45atWDcoG1suReFZhBuoX26rty/exec",
+  {
+    method: "POST",
+    mode: "no-cors",
+    body: JSON.stringify({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      projectType: formData.project,
+      message: formData.message,
+    }),
+  }
+);
 
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      project: '',
-      message: ''
-    });
+alert("Message submitted successfully!");
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        project: '',
+        message: ''
+      });
+
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        'Failed to submit. Please try again.'
+      );
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -120,6 +148,7 @@ export default function Contact() {
               placeholder="Phone Number"
               value={formData.phone}
               onChange={handleChange}
+              required
             />
 
             <input
@@ -128,6 +157,7 @@ export default function Contact() {
               placeholder="Project Type"
               value={formData.project}
               onChange={handleChange}
+              required
             />
 
           </div>
@@ -144,8 +174,10 @@ export default function Contact() {
           <button
             type="submit"
             className="btn"
+            disabled={loading}
           >
-            Submit Message
+            {loading ? 'Sending...' : 'Submit Message'}
+
             <Send size={17} />
           </button>
 
