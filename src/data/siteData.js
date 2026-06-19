@@ -1,8 +1,34 @@
 import {
-  BriefcaseBusiness, Code2, Cpu, Database, FileText, Globe2, HeartHandshake,
-  Headphones, Layers3, LayoutDashboard, MonitorSmartphone, ShieldCheck, Smartphone,
-  Target, Trophy, UsersRound, CloudUpload, Building2, Hospital, Utensils, GraduationCap,
-  Factory, ShoppingCart, ArrowRight, CheckCircle2, MapPin, Mail, Phone, Clock3
+  BriefcaseBusiness,
+  Code2,
+  Cpu,
+  Database,
+  FileText,
+  Globe2,
+  HeartHandshake,
+  Headphones,
+  Layers3,
+  LayoutDashboard,
+  MonitorSmartphone,
+  ShieldCheck,
+  Smartphone,
+  Target,
+  Trophy,
+  UsersRound,
+  CloudUpload,
+  Building2,
+  Hospital,
+  Utensils,
+  GraduationCap,
+  Factory,
+  ShoppingCart,
+  ArrowRight,
+  CheckCircle2,
+  MapPin,
+  Mail,
+  Phone,
+  Clock3,
+  Bot
 } from 'lucide-react';
 
 export const company = {
@@ -59,6 +85,30 @@ export const services = [
   { slug: 'database-development', title: 'Database Development', icon: Database, short: 'Optimized, secure and reliable database design and development.', details: 'Schema design, indexing, reporting data models, migrations, backups and performance tuning.' },
   { slug: 'saas-development', title: 'SaaS Development', icon: Globe2, short: 'Build and launch scalable SaaS platforms that users love.', details: 'Multi-tenant SaaS platforms, subscription flows, roles, dashboards and deployment pipelines.' },
   { slug: 'content-management', title: 'Enterprise Content Management', icon: FileText, short: 'Organize, manage and secure enterprise content efficiently.', details: 'Document workflows, approval systems, file management, access control and searchable repositories.' },
+  { slug: 'ai-solutions' ,title: 'AI Solutions & Automation', icon: Bot, short: 'AI-powered automation, chatbots and intelligent business solutions.', details: 'Custom AI chatbots, AI agents, workflow automation, customer support automation, lead generation, document processing, AI integrations and business intelligence solutions.'},
+  {
+  slug: 'ui-ux-design',
+  title: 'UI/UX Design',
+  icon: MonitorSmartphone,
+  short: 'Beautiful and user-friendly digital experiences designed for engagement.',
+  details: 'Wireframing, prototyping, user research, design systems, mobile app interfaces and modern user experiences that improve conversions.'
+},
+
+{
+  slug: 'erp-solutions',
+  title: 'ERP Solutions',
+  icon: Building2,
+  short: 'Custom ERP systems to streamline and automate business operations.',
+  details: 'Hospital ERP, School ERP, Inventory Management, HRMS, CRM, Accounting Systems and industry-specific ERP solutions.'
+},
+
+{
+  slug: 'digital-transformation',
+  title: 'Digital Transformation',
+  icon: Layers3,
+  short: 'Modernize business operations with technology-driven transformation.',
+  details: 'Process digitization, workflow automation, ERP modernization, cloud migration and technology consulting for business growth.'
+},
 ];
 
 export const valueProps = [
